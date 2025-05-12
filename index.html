@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio Template</title>
+    
+    <style>
+        /* --- Global Styles & Variables --- */
+        
+        /* LEARNING POINT: CSS Variables
+           Variables make it easy to manage colors, fonts, etc., consistently.
+           Try changing these colors to create your own theme!
+        */
+        :root {
+            --primary-color: #007bff; /* Blue */
+            --secondary-color: #6c757d; /* Gray */
+            --background-color: #f8f9fa; /* Light Gray */
+            --text-color: #343a40; /* Dark Gray */
+            --heading-font: 'Arial', sans-serif; /* Choose a font */
+            --body-font: 'Georgia', serif;    /* Choose a font */
+            --container-width: 960px; 
+        }
+
+        /* LEARNING POINT: Basic Reset & Box Model
+           'box-sizing: border-box' makes working with padding and borders more intuitive.
+           Resetting margin/padding helps ensure consistent spacing across browsers.
+        */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--body-font);
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            padding-top: 60px; /* Prevent content from hiding under fixed nav */
+        }
+
+        /* LEARNING POINT: Container
+           A common pattern to center content and limit its maximum width.
+        */
+        .container {
+            max-width: var(--container-width);
+            margin: 20px auto; /* Centers the container */
+            padding: 0 20px; /* Padding on the sides */
+            background-color: #ffffff; /* White background for content area */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
+            border-radius: 8px; /* Rounded corners */
+            padding: 30px; /* Inner padding for content */
+        }
+
+        /* --- Typography --- */
+        /* LEARNING POINT: Styling Headings & Paragraphs */
+        h1, h2, h3 {
+            font-family: var(--heading-font);
+            color: var(--primary-color);
+            margin-bottom: 0.8em; /* Space below headings */
+        }
+
+        h1 { font-size: 2.5em; text-align: center; }
+        h2 { font-size: 1.8em; border-bottom: 2px solid var(--primary-color); padding-bottom: 5px; margin-top: 1.5em; }
+        h3 { font-size: 1.3em; color: var(--secondary-color); }
+        
+        p {
+            margin-bottom: 1em; /* Space below paragraphs */
+        }
+
+        /* LEARNING POINT: Styling Links */
+        a {
+            color: var(--primary-color);
+            text-decoration: none; /* Remove underline */
+        }
+        a:hover {
+            text-decoration: underline; /* Add underline on hover */
+            opacity: 0.8; /* Slight fade effect */
+        }
+        
+        /* LEARNING POINT: Styling Lists */
+        ul, ol {
+            margin-left: 20px; /* Indentation for lists */
+            margin-bottom: 1em;
+        }
+        li {
+            margin-bottom: 0.5em; /* Space between list items */
+        }
+
+        /* --- Structure & Layout --- */
+        /* LEARNING POINT: Header, Nav, Main, Footer Semantics */
+
+        /* Header Styles */
+        .site-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .site-header h1 { color: white; margin-bottom: 0.2em; }
+        .site-header .tagline { color: #e0e0e0; font-style: italic; }
+
+        /* Navigation Styles */
+        /* LEARNING POINT: Basic Flexbox for Nav
+           Flexbox is great for arranging items in a row or column.
+           Explore other flex properties like 'justify-content' and 'align-items'.
+        */
+        .main-nav {
+            background-color: var(--text-color);
+            padding: 10px 0;
+            position: fixed; /* Make nav sticky */
+            top: 0;
+            width: 100%;
+            z-index: 1000; /* Ensure nav stays on top */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .main-nav ul {
+            list-style: none; /* Remove bullet points */
+            padding: 0;
+            margin: 0 auto; /* Center nav links */
+            max-width: var(--container-width); 
+            display: flex; /* Arrange list items in a row */
+            justify-content: center; /* Center items horizontally */
+        }
+        .main-nav li {
+            margin: 0 15px; /* Space between nav items */
+        }
+        .main-nav a {
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase; /* Make text uppercase */
+            font-size: 0.9em;
+            padding: 5px 0; /* Padding for easier clicking */
+            border-bottom: 2px solid transparent; /* Placeholder for hover effect */
+            transition: border-color 0.3s ease; /* Smooth transition */
+        }
+        .main-nav a:hover {
+            text-decoration: none; /* Keep underline off */
+            border-bottom-color: var(--primary-color); /* Highlight on hover */
+            opacity: 1;
+        }
+
+        /* Main Content Sections */
+        /* LEARNING POINT: Using IDs for Sections & Navigation */
+        section {
+            margin-bottom: 40px; /* Space between sections */
+            padding-top: 60px; /* Offset for fixed nav anchor links */
+            margin-top: -60px; /* Adjust margin to counteract padding */
+        }
+        
+        /* LEARNING POINT: Image Styling */
+        .profile-pic {
+            max-width: 150px;
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 50%; /* Make image circular */
+            display: block; /* Allows margin auto centering */
+            margin: 0 auto 20px auto; /* Center image and add space below */
+            border: 3px solid var(--primary-color);
+        }
+
+        /* Project Article Styling */
+        /* LEARNING POINT: Styling self-contained <article> elements */
+        .project {
+            background-color: #fdfdfd;
+            border: 1px solid #eee;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .project h3 { margin-top: 0; } /* Remove top margin for heading inside project */
+
+        /* Contact Form Styling */
+        /* LEARNING POINT: Basic Form Styling */
+        .contact-form label {
+            display: block; /* Place label above input */
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%; /* Make inputs fill container width */
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: inherit; /* Use body font */
+        }
+        .contact-form textarea {
+            min-height: 100px; /* Give textarea some height */
+            resize: vertical; /* Allow vertical resizing */
+        }
+        .contact-form button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer; /* Indicate clickable */
+            font-size: 1em;
+            transition: background-color 0.3s ease; /* Smooth hover effect */
+        }
+        .contact-form button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        /* Footer Styles */
+        .site-footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px 0;
+            background-color: var(--text-color);
+            color: #ccc; /* Light gray text */
+            font-size: 0.9em;
+        }
+        .site-footer p { margin-bottom: 0; }
+        
+        /* LEARNING POINT: Media Queries (Optional Introduction)
+           Media queries allow applying CSS rules based on screen size.
+           This is the foundation of responsive design. Uncomment to see effect on smaller screens.
+           Try making the navigation stack vertically or adjusting font sizes.
+        */
+        /*
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 20px;
+            }
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.5em; }
+            
+            .main-nav ul {
+                flex-direction: column; // Stack nav items vertically
+                align-items: center; // Center stacked items
+            }
+            .main-nav li {
+                margin: 5px 0; // Adjust spacing for vertical layout
+            }
+        }
+        */
+
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <h1>Your Name Here</h1>
+        <p class="tagline">Aspiring Web Developer | Creative Thinker | Lifelong Learner</p> 
+    </header>
+
+    <nav class="main-nav">
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+
+        <section id="about">
+            <h2>About Me</h2>
+            <img src="https://placehold.co/150x150/007bff/white?text=You" alt="A placeholder profile picture" class="profile-pic">
+            
+            <p>
+                Welcome to my personal portfolio page! I am currently learning web development and exploring the exciting world of HTML, CSS, and JavaScript. This page is a single-file template designed to showcase foundational web concepts. 
+            </p>
+            <p>
+                I am passionate about [mention a passion related to tech or design] and enjoy [mention a hobby]. My goal is to build intuitive and engaging web experiences. Feel free to explore my projects and skills below!
+            </p>
+        </section>
+
+        <section id="projects">
+            <h2>My Projects</h2>
+            <article class="project">
+                <h3>Project 1: Portfolio Template (This Page!)</h3>
+                <p>
+                    This is the very page you are looking at! It's built using semantic HTML5 elements and styled with CSS, including variables, basic layout, and typography. The goal was to create a reusable template for learning foundational web development concepts.
+                </p>
+                <p><a href="#">View Source (If applicable)</a></p> 
+            </article>
+
+            <article class="project">
+                <h3>Project 2: [Your Next Project Title]</h3>
+                <p>
+                    This space is ready for your next creation! Maybe a simple calculator, a recipe page, or an interactive photo gallery? Think about what HTML elements you would need.
+                </p>
+                <p><a href="#">Link to Project (coming soon!)</a></p> 
+            </article>
+            
+            </section>
+
+        <section id="skills">
+            <h2>Skills</h2>
+            <ul>
+                <li>HTML5 (Semantic Elements, Forms, etc.)</li>
+                <li>CSS3 (Selectors, Box Model, Variables, Basic Flexbox)</li>
+                <li>Understanding of Web Structure</li>
+                <li>Problem Solving</li>
+                <li>Creativity & Design Thinking</li>
+                </ul>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Me</h2>
+            <p>
+                Interested in collaborating or have a question? Feel free to reach out using the form below. (Note: This form is a template and doesn't actually send emails without server-side code or a service like Formspree).
+            </p>
+
+            <form action="#" method="POST" class="contact-form">
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="user_name" required> 
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="user_email" required>
+                </div>
+                <div>
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="user_message" required></textarea>
+                </div>
+                <div>
+                    <button type="submit">Send Message</button>
+                </div>
+            </form>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 Your Name Here. Template created for educational purposes.</p>
+        </footer>
+
+</body>
+</html>
